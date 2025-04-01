@@ -1,32 +1,37 @@
-name: CI
+name: CI with SonarCloud Analysis
 
 on:
   push:
-    branches: [main, master, develop]
+    branches: ["main"]
   pull_request:
-    branches: [main, master]
+    branches: ["main"]
 
 jobs:
-  build_and_test:
+  build-and-analyze:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      # Passo 1: Baixar o código
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          node-version: "18"
-          cache: "npm"
+          fetch-depth: 0 # Necessário para o SonarCloud
 
+      # Passo 2: Configurar Node.js (para projetos JavaScript)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Passo 3: Instalar dependências e rodar testes (se aplicável)
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Lint
-        run: npm run lint
+      - name: Run tests and generate coverage
+        run: npm test # Substitua pelo comando que gera relatório de cobertura (ex: "npm test -- --coverage")
 
-      - name: Run tests
-        run: npm test
-
-      - name: Build
-        run: npm run build
+      # Passo 4: Executar análise no SonarCloud
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Token automático do GitHub
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Token que você criou no Passo 1
