@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Login from "../paginas/Login"; // Ajuste o caminho se necessário
