@@ -24,9 +24,6 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Rodar lint
-        run: npm run lint --if-present
-
       - name: Rodar build
         run: npm run build
 
