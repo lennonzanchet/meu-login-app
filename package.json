@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-require-module jest --watchAll=false"
   },
   "dependencies": {
     "jest-environment-jsdom": "^29.7.0",
