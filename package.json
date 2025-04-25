@@ -2,13 +2,12 @@
   "name": "meu-login-app",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "NODE_OPTIONS=--experimental-require-module jest --watchAll=false"
+    "test": "jest"
   },
   "dependencies": {
     "jest-environment-jsdom": "^29.7.0",
